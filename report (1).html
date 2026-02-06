@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenBorder — January 2026 Marketing Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07090d;
+  --surface: rgba(16,19,28,.72);
+  --surface-solid: #10131c;
+  --surface2: #161a26;
+  --surface3: #1c2130;
+  --border: rgba(255,255,255,.06);
+  --border-hover: rgba(255,255,255,.12);
+  --text: #eaeff6;
+  --text-dim: #8a94ae;
+  --text-muted: #525e76;
+  --accent: #5b9aff;
+  --accent2: #8b6cff;
+  --green: #3ee8a5;
+  --green-dim: rgba(62,232,165,.10);
+  --yellow: #ffc245;
+  --yellow-dim: rgba(255,194,69,.10);
+  --red: #ff6b6b;
+  --red-dim: rgba(255,107,107,.10);
+  --blue-dim: rgba(91,154,255,.08);
+  --purple-dim: rgba(139,108,255,.10);
+  --gradient-brand: linear-gradient(135deg, #5b9aff 0%, #8b6cff 50%, #c56cff 100%);
+  --gradient-green: linear-gradient(135deg, #3ee8a5 0%, #5b9aff 100%);
+  --gradient-warm: linear-gradient(135deg, #ffc245 0%, #ff6b6b 100%);
+  --glass: rgba(16,19,28,.60);
+  --glass-border: rgba(255,255,255,.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Background ambient glow */
+body::before {
+  content: '';
+  position: fixed; top: -30%; left: -20%;
+  width: 70vw; height: 70vw;
+  background: radial-gradient(circle, rgba(91,154,255,.04) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed; bottom: -30%; right: -20%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(139,108,255,.03) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+/* ─────────── STICKY NAV ─────────── */
+.sticky-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(7,9,13,.85);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+  transform: translateY(-100%);
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+}
+.sticky-nav.visible { transform: translateY(0); }
+.sticky-nav .nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 32px;
+  display: flex; align-items: center;
+  height: 56px; gap: 8px;
+  overflow-x: auto;
+}
+.sticky-nav .nav-inner::-webkit-scrollbar { display: none; }
+.nav-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px; font-weight: 400;
+  color: var(--text);
+  margin-right: 24px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-link {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px; font-weight: 500;
+  color: var(--text-dim);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all .2s;
+  border: 1px solid transparent;
+}
+.nav-link:hover { color: var(--text); background: rgba(255,255,255,.04); }
+.nav-link.active { color: var(--accent); background: var(--blue-dim); border-color: rgba(91,154,255,.15); }
+
+/* ─────────── HERO ─────────── */
+.hero {
+  position: relative;
+  padding: 100px 0 48px;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute; top: -180px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 500px;
+  background: radial-gradient(ellipse at center, rgba(91,154,255,.08) 0%, rgba(139,108,255,.04) 40%, transparent 70%);
+  pointer-events: none;
+}
+.hero-grid-overlay {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center top, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center top, black 30%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-top {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 32px;
+  animation: fadeUp .6s ease both;
+}
+.hero-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px; font-weight: 400;
+  letter-spacing: -.01em;
+}
+.hero-divider { width: 1px; height: 24px; background: var(--border); }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: 100px;
+  background: var(--blue-dim); border: 1px solid rgba(91,154,255,.15);
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  letter-spacing: .03em; text-transform: uppercase;
+}
+.hero-badge .pulse-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.8); } }
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  margin-bottom: 16px;
+  animation: fadeUp .6s ease .1s both;
+}
+.hero h1 .gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .subtitle {
+  font-size: 17px; color: var(--text-dim); max-width: 620px;
+  line-height: 1.65;
+  animation: fadeUp .6s ease .2s both;
+}
+.hero .subtitle strong { color: var(--text); font-weight: 600; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────── PIPELINE PROGRESS ─────────── */
+.pipeline-wrap {
+  margin-top: 48px;
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  animation: fadeUp .6s ease .3s both;
+}
+.pipeline-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+}
+.pipeline-header .label {
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .1em;
+  margin-bottom: 6px;
+}
+.pipeline-header .amount {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px; font-weight: 400;
+  display: flex; align-items: baseline; gap: 12px;
+}
+.pipeline-header .amount .target {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px; color: var(--text-muted); font-weight: 400;
+}
+.pipeline-track {
+  width: 100%; height: 10px; border-radius: 100px;
+  background: var(--surface3);
+  overflow: hidden; position: relative;
+}
+.pipeline-fill {
+  height: 100%; border-radius: 100px;
+  background: var(--gradient-brand);
+  width: 0;
+  transition: width 2s cubic-bezier(.22,1,.36,1);
+  position: relative;
+}
+.pipeline-fill::after {
+  content: ''; position: absolute;
+  right: 0; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; border-radius: 50%;
+  background: white; box-shadow: 0 0 20px rgba(91,154,255,.5);
+  opacity: 0;
+  transition: opacity .3s .8s;
+}
+.pipeline-fill.animated::after { opacity: 1; }
+.pipeline-meta {
+  display: flex; justify-content: space-between;
+  margin-top: 12px; font-size: 13px; color: var(--text-muted);
+}
+.pipeline-meta .pct { color: var(--accent); font-weight: 600; }
+
+/* ─────────── KPI CARDS ─────────── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-top: 28px;
+}
+.kpi-card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 22px;
+  position: relative; overflow: hidden;
+  transition: border-color .25s, transform .25s;
+  animation: fadeUp .5s ease both;
+}
+.kpi-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+.kpi-card .accent-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.kpi-card .accent-line.blue { background: var(--gradient-brand); }
+.kpi-card .accent-line.green { background: var(--gradient-green); }
+.kpi-card .accent-line.warm { background: var(--gradient-warm); }
+.kpi-card .accent-line.purple { background: linear-gradient(135deg, #8b6cff, #c56cff); }
+
+.kpi-label {
+  font-size: 11px; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 10px;
+}
+.kpi-value {
+  font-family: 'Instrument Serif', serif;
+  font-size: 30px; font-weight: 400; line-height: 1.1;
+  letter-spacing: -.02em;
+}
+.kpi-sub { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+.kpi-tag {
+  display: inline-block; margin-top: 10px;
+  padding: 3px 10px; border-radius: 100px;
+  font-size: 10px; font-weight: 700; letter-spacing: .03em;
+}
+.kpi-tag.up { background: var(--green-dim); color: var(--green); }
+.kpi-tag.warn { background: var(--yellow-dim); color: var(--yellow); }
+
+/* ─────────── SECTIONS ─────────── */
+section.report-section { padding: 64px 0 0; }
+.section-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 32px;
+}
+.section-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.section-icon.email { background: var(--blue-dim); }
+.section-icon.ads { background: var(--green-dim); }
+.section-icon.lp { background: var(--yellow-dim); }
+.section-icon.deals { background: var(--purple-dim); }
+.section-icon.funnel { background: rgba(197,108,255,.10); }
+.section-icon.insight { background: rgba(91,154,255,.08); }
+.section-icon.next { background: rgba(62,232,165,.08); }
+.section-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 30px; font-weight: 400;
+  letter-spacing: -.01em;
+}
+.section-header .badge {
+  padding: 5px 14px; border-radius: 100px;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.badge-green { background: var(--green-dim); color: var(--green); }
+.badge-blue { background: var(--blue-dim); color: var(--accent); }
+.badge-yellow { background: var(--yellow-dim); color: var(--yellow); }
+
+.divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 48px 0 0;
+}
+
+/* ─────────── CHANNEL CARDS ─────────── */
+.channel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+.channel-card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color .25s;
+}
+.channel-card:hover { border-color: var(--border-hover); }
+.channel-card h4 {
+  font-size: 15px; font-weight: 700; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.dot-indicator { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+.stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-row .label { color: var(--text-dim); }
+.stat-row .val { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.callout-box {
+  margin-top: 16px; padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px; line-height: 1.6;
+}
+.callout-box.blue { background: var(--blue-dim); color: var(--accent); border: 1px solid rgba(91,154,255,.1); }
+.callout-box.yellow { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(255,194,69,.1); }
+.callout-box.green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(62,232,165,.1); }
+.callout-box strong { font-weight: 700; }
+
+/* ─────────── TABLES ─────────── */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.table-scroll { overflow-x: auto; }
+.table-scroll::-webkit-scrollbar { height: 4px; }
+.table-scroll::-webkit-scrollbar-track { background: var(--surface2); }
+.table-scroll::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 4px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  background: var(--surface2);
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 700; font-size: 10.5px;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: var(--text-dim);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+}
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr { transition: background .15s; }
+tbody tr:hover { background: rgba(91,154,255,.03); }
+
+.status-pill {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 100px; font-size: 10px; font-weight: 700;
+  letter-spacing: .03em;
+}
+.status-pill.completed { background: var(--green-dim); color: var(--green); }
+.status-pill.active { background: var(--blue-dim); color: var(--accent); }
+.status-pill.paused { background: var(--yellow-dim); color: var(--yellow); }
+.status-pill.drafted { background: rgba(82,94,118,.2); color: var(--text-muted); }
+
+.positive-badge { display: inline-flex; align-items: center; gap: 4px; color: var(--green); font-weight: 700; }
+
+/* ─────────── CHARTS ─────────── */
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.chart-container h4 {
+  font-size: 13px; font-weight: 700; margin-bottom: 20px;
+  color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.chart-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+/* ─────────── FUNNEL VISUAL ─────────── */
+.funnel-visual {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin: 24px 0;
+  position: relative;
+}
+.funnel-stage {
+  text-align: center; position: relative;
+  flex: 1; max-width: 200px;
+}
+.funnel-bar {
+  height: 56px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Instrument Serif', serif;
+  font-size: 26px; font-weight: 400;
+  color: white; position: relative;
+  margin: 0 auto;
+  transition: transform .3s;
+}
+.funnel-bar:hover { transform: scale(1.05); }
+.funnel-stage-label {
+  margin-top: 10px;
+  font-size: 11px; font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.funnel-arrow {
+  font-size: 20px; color: var(--text-muted);
+  margin: 0 -8px; position: relative; top: -10px; z-index: 2;
+}
+.funnel-conv {
+  font-size: 10px; font-weight: 700;
+  color: var(--green);
+  margin-top: 4px;
+}
+
+/* ─────────── DEAL CARDS ─────────── */
+.deal-tag {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 100px; font-size: 10px; font-weight: 700;
+  letter-spacing: .02em;
+}
+.deal-tag.engaged { background: var(--blue-dim); color: var(--accent); }
+.deal-tag.qualified { background: var(--green-dim); color: var(--green); }
+.deal-tag.proposal { background: var(--yellow-dim); color: var(--yellow); }
+.deal-tag.highly-engaged { background: var(--purple-dim); color: #c56cff; }
+
+.source-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 100px;
+  font-size: 10px; font-weight: 600;
+  background: rgba(91,154,255,.08); color: var(--accent);
+}
+
+/* ─────────── LP CARDS ─────────── */
+.lp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+.lp-card {
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: border-color .25s, transform .25s;
+}
+.lp-card:hover { border-color: rgba(91,154,255,.25); transform: translateY(-3px); }
+.lp-card h5 { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+.lp-card .metric {
+  display: flex; justify-content: space-between;
+  font-size: 13px; padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+}
+.lp-card .metric:last-child { border-bottom: none; }
+.lp-card .metric .label { color: var(--text-dim); }
+.lp-card .metric .val { font-weight: 700; }
+.lp-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 14px;
+  font-size: 13px; font-weight: 600; color: var(--accent);
+  text-decoration: none; transition: gap .2s;
+}
+.lp-link:hover { gap: 10px; }
+
+/* ─────────── CREATIVE LINKS ─────────── */
+.creative-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 20px;
+}
+.creative-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  font-size: 12.5px; font-weight: 600;
+  text-decoration: none;
+  transition: all .25s;
+}
+.creative-link:hover { border-color: var(--accent); background: var(--surface2); color: var(--accent); }
+.creative-link .arrow { color: var(--text-muted); transition: color .2s; }
+.creative-link:hover .arrow { color: var(--accent); }
+
+/* ─────────── INSIGHT BANNER ─────────── */
+.insight-banner {
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 36px;
+  position: relative; overflow: hidden;
+}
+.insight-banner::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; bottom: 0; width: 3px;
+  background: var(--gradient-brand);
+}
+.insight-banner h4 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px; font-weight: 400;
+  margin-bottom: 20px;
+}
+.insight-banner ul {
+  list-style: none; display: flex; flex-direction: column; gap: 14px;
+}
+.insight-banner li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: var(--text-dim); line-height: 1.65;
+}
+.insight-banner li::before {
+  content: '→'; color: var(--accent); font-weight: 800;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* ─────────── NEXT STEPS ─────────── */
+.next-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+.next-card {
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color .25s;
+}
+.next-card:hover { border-color: var(--border-hover); }
+.next-card .num {
+  width: 30px; height: 30px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800;
+  background: var(--blue-dim); color: var(--accent);
+  margin-bottom: 14px;
+}
+.next-card h5 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.next-card p { font-size: 13.5px; color: var(--text-dim); line-height: 1.65; }
+
+/* ─────────── REPLIES TABLE SECTION ─────────── */
+.replies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.reply-card {
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  transition: border-color .25s;
+}
+.reply-card:hover { border-color: var(--border-hover); }
+.reply-card .brand { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.reply-card .campaign-source { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+.reply-card .reply-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+.reply-card .reply-meta span {
+  font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* ─────────── FOOTER ─────────── */
+footer {
+  padding: 56px 0 48px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted); font-size: 13px;
+  margin-top: 64px;
+}
+footer .logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px; font-weight: 400;
+  color: var(--text); margin-bottom: 8px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ─────────── RESPONSIVE ─────────── */
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 72px 0 40px; }
+  .pipeline-wrap { padding: 22px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .kpi-value { font-size: 24px; }
+  .channel-grid, .chart-row, .next-grid, .lp-grid { grid-template-columns: 1fr; }
+  .funnel-visual { flex-direction: column; gap: 12px; }
+  .funnel-arrow { transform: rotate(90deg); }
+}
+
+/* ─────────── SCROLL REVEAL ─────────── */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─────────── ANIMATED COUNTER ─────────── */
+.counter { transition: all .3s; }
+
+/* ─────────── MISC ─────────── */
+.mt-24 { margin-top: 24px; }
+.mt-16 { margin-top: 16px; }
+.sub-heading {
+  font-size: 15px; font-weight: 700;
+  margin: 28px 0 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ═════════ STICKY NAV ═════════ -->
+<nav class="sticky-nav" id="stickyNav">
+  <div class="nav-inner">
+    <div class="nav-logo">OpenBorder</div>
+    <a href="#overview" class="nav-link active" data-section="overview">Overview</a>
+    <a href="#email" class="nav-link" data-section="email">Email</a>
+    <a href="#paid-ads" class="nav-link" data-section="paid-ads">Paid Ads</a>
+    <a href="#ads-lp" class="nav-link" data-section="ads-lp">Ads + LPs</a>
+    <a href="#deals" class="nav-link" data-section="deals">Deals</a>
+    <a href="#funnel" class="nav-link" data-section="funnel">Funnel QoQ</a>
+    <a href="#insights" class="nav-link" data-section="insights">Insights</a>
+    <a href="#next-steps" class="nav-link" data-section="next-steps">Next Steps</a>
+  </div>
+</nav>
+
+<!-- ═════════ HERO ═════════ -->
+<header class="hero" id="overview">
+  <div class="hero-glow"></div>
+  <div class="hero-grid-overlay"></div>
+  <div class="container">
+    <div class="hero-top">
+      <div class="hero-logo">OpenBorder</div>
+      <div class="hero-divider"></div>
+      <div class="hero-badge"><span class="pulse-dot"></span> January 2026</div>
+    </div>
+    <h1>Marketing Monthly<br><span class="gradient-text">Performance Report</span></h1>
+    <p class="subtitle">Pipeline generation, channel performance, deal progression, and strategic next steps for <strong>OpenBorder's Q1 2026</strong> marketing engine.</p>
+
+    <!-- Pipeline Progress -->
+    <div class="pipeline-wrap">
+      <div class="pipeline-header">
+        <div>
+          <div class="label">Q1 Pipeline Progress</div>
+          <div class="amount">$415,442 <span class="target">/ $2,000,000 target</span></div>
+        </div>
+        <div style="text-align:right">
+          <div class="label">Avg Deal Size</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:24px;">$51,930</div>
+        </div>
+      </div>
+      <div class="pipeline-track">
+        <div class="pipeline-fill" id="pipelineFill"></div>
+      </div>
+      <div class="pipeline-meta">
+        <span><span class="pct">20.77%</span> of quarterly target achieved in Month 1</span>
+        <span>8 opportunities created</span>
+      </div>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card" style="animation-delay:.35s">
+        <div class="accent-line blue"></div>
+        <div class="kpi-label">Pipeline</div>
+        <div class="kpi-value">$415K</div>
+        <div class="kpi-sub">20.77% of $2M target</div>
+      </div>
+      <div class="kpi-card" style="animation-delay:.4s">
+        <div class="accent-line green"></div>
+        <div class="kpi-label">Meetings</div>
+        <div class="kpi-value">37</div>
+        <div class="kpi-sub">26 completed · 70.3% show rate</div>
+        <span class="kpi-tag up">Strong</span>
+      </div>
+      <div class="kpi-card" style="animation-delay:.45s">
+        <div class="accent-line purple"></div>
+        <div class="kpi-label">Opportunities</div>
+        <div class="kpi-value">8</div>
+        <div class="kpi-sub">30.8% of completed meetings</div>
+      </div>
+      <div class="kpi-card" style="animation-delay:.5s">
+        <div class="accent-line warm"></div>
+        <div class="kpi-label">Paid Spend</div>
+        <div class="kpi-value">$19K</div>
+        <div class="kpi-sub">Meta, Google, 6sense</div>
+      </div>
+      <div class="kpi-card" style="animation-delay:.55s">
+        <div class="accent-line blue"></div>
+        <div class="kpi-label">Emails Sent</div>
+        <div class="kpi-value">11,514</div>
+        <div class="kpi-sub">14 positive replies · 0.12%</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- ═════════ EMAIL OUTBOUND ═════════ -->
+<section class="report-section container reveal" id="email">
+  <div class="section-header">
+    <div class="section-icon email">📧</div>
+    <h2>Email Outbound</h2>
+    <span class="badge badge-green">Pipeline Driver</span>
+  </div>
+
+  <div class="channel-grid">
+    <div class="channel-card">
+      <h4><span class="dot-indicator" style="background:var(--accent)"></span> January Performance</h4>
+      <div class="stat-row"><span class="label">Emails Sent</span><span class="val">11,514</span></div>
+      <div class="stat-row"><span class="label">Total Replies</span><span class="val">158</span></div>
+      <div class="stat-row"><span class="label">Positive Replies</span><span class="val positive-badge">14</span></div>
+      <div class="stat-row"><span class="label">Positive Reply Rate</span><span class="val">0.12%</span></div>
+      <div class="stat-row"><span class="label">Meetings from Email</span><span class="val">6</span></div>
+      <div class="stat-row"><span class="label">Positive → Meeting</span><span class="val">42.9%</span></div>
+      <div class="stat-row"><span class="label">Pipeline Generated</span><span class="val" style="color:var(--green)">$375,442</span></div>
+    </div>
+    <div class="channel-card">
+      <h4><span class="dot-indicator" style="background:var(--green)"></span> Prior-Quarter Impact</h4>
+      <div class="stat-row"><span class="label">Prior-Q Leads → Jan Meetings</span><span class="val">15</span></div>
+      <div class="stat-row"><span class="label">Opportunities Created</span><span class="val">6</span></div>
+      <div class="stat-row"><span class="label">Pipeline from Prior-Q</span><span class="val" style="color:var(--green)">$375,442</span></div>
+      <div class="stat-row"><span class="label">Key Insight</span><span class="val" style="font-size:11px;color:var(--text-dim)">Lagging conversion engine</span></div>
+      <div class="callout-box blue">
+        <strong>💡 Takeaway:</strong> Email creates durable pipeline — prior-quarter leads converting into 6 opps / $375K proves the channel's compounding value over time.
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="chart-row mt-24">
+    <div class="chart-container">
+      <h4>Top Campaigns by Positive Replies</h4>
+      <canvas id="campaignRepliesChart" height="220"></canvas>
+    </div>
+    <div class="chart-container">
+      <h4>Email Volume by Campaign</h4>
+      <canvas id="emailVolumeChart" height="220"></canvas>
+    </div>
+  </div>
+
+  <!-- January Positive Replies Detail -->
+  <div class="sub-heading" style="margin-top:28px">🔥 January Positive Replies — Brand Details</div>
+  <div class="replies-grid">
+    <div class="reply-card">
+      <div class="brand">iam8bit.com</div>
+      <div class="campaign-source">High Intl Traffic (40%+)</div>
+      <div class="reply-meta">
+        <span style="background:var(--green-dim);color:var(--green)">Meeting Completed</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">343K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">humanthings.co</div>
+      <div class="campaign-source">High Intl Traffic (40%+)</div>
+      <div class="reply-meta">
+        <span style="background:var(--blue-dim);color:var(--accent)">Interested</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">192K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">sigmabeauty.com</div>
+      <div class="campaign-source">High Intl Traffic (40%+)</div>
+      <div class="reply-meta">
+        <span style="background:var(--blue-dim);color:var(--accent)">Info Request</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">179K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">joesge.com</div>
+      <div class="campaign-source">High Intl Traffic (40%+)</div>
+      <div class="reply-meta">
+        <span style="background:var(--blue-dim);color:var(--accent)">Info Request</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">138K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">brandonblackwood.com</div>
+      <div class="campaign-source">Using Global-e</div>
+      <div class="reply-meta">
+        <span style="background:var(--green-dim);color:var(--green)">Meeting Completed</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">82K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">mezlan.com</div>
+      <div class="campaign-source">Using Global-e</div>
+      <div class="reply-meta">
+        <span style="background:var(--green-dim);color:var(--green)">Meeting Completed</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">109K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">anatomie.com</div>
+      <div class="campaign-source">Using Global-e</div>
+      <div class="reply-meta">
+        <span style="background:var(--green-dim);color:var(--green)">Meeting Completed</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">39K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">matethelabel.com</div>
+      <div class="campaign-source">Using Global-e</div>
+      <div class="reply-meta">
+        <span style="background:var(--green-dim);color:var(--green)">Meeting Booked — 19 Feb</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">380K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">knkg.com</div>
+      <div class="campaign-source">Intl Returns – Apparel</div>
+      <div class="reply-meta">
+        <span style="background:var(--green-dim);color:var(--green)">Meeting Completed</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">66K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">uncrate.com</div>
+      <div class="campaign-source">Intl Returns – Apparel</div>
+      <div class="reply-meta">
+        <span style="background:var(--blue-dim);color:var(--accent)">Info Request</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">1.35M traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">apothekary.com</div>
+      <div class="campaign-source">UK Traffic Fast Growth</div>
+      <div class="reply-meta">
+        <span style="background:var(--blue-dim);color:var(--accent)">Info Request</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">132K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">konnybaby.com</div>
+      <div class="campaign-source">High Canada Traffic</div>
+      <div class="reply-meta">
+        <span style="background:var(--blue-dim);color:var(--accent)">Info Request</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">71K traffic</span>
+      </div>
+    </div>
+    <div class="reply-card">
+      <div class="brand">projectrepat.com</div>
+      <div class="campaign-source">DDU Brands Need DDP</div>
+      <div class="reply-meta">
+        <span style="background:var(--blue-dim);color:var(--accent)">Info Request</span>
+        <span style="background:var(--surface2);color:var(--text-dim)">140K traffic</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email Campaigns Table -->
+  <div class="sub-heading">📋 All Email Campaigns — January 2026</div>
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Campaign</th><th>Sent</th><th>Reply Rate</th><th>Replies</th><th>Positive</th><th>Meetings</th><th>Pipeline</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>High Intl Traffic (40%+)</strong></td><td>2,639</td><td>1.55%</td><td>41</td><td><span class="positive-badge">5</span></td><td>4</td><td>$20,000</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td><strong>Using Global-e</strong></td><td>1,527</td><td>1.07%</td><td>16</td><td><span class="positive-badge">4</span></td><td>6</td><td>$24,000</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td><strong>Intl Returns – Apparel</strong></td><td>1,139</td><td>1.40%</td><td>16</td><td><span class="positive-badge">2</span></td><td>3</td><td>—</td><td><span class="status-pill active">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>UK Traffic Fast Growth</strong></td><td>1,534</td><td>1.83%</td><td>28</td><td><span class="positive-badge">1</span></td><td>2</td><td>—</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>High Intl Traffic (25%+)</td><td>722</td><td>1.85%</td><td>13</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td><strong>DDU Brands Need DDP</strong></td><td>502</td><td>2.09%</td><td>10</td><td><span class="positive-badge">1</span></td><td>1</td><td>—</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>High EU Traffic</td><td>85</td><td style="color:var(--green)">3.53%</td><td>3</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>High Canada Traffic</td><td>150</td><td>1.33%</td><td>2</td><td><span class="positive-badge">1</span></td><td>—</td><td>—</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>Copy Paste US Ads – T3</td><td>937</td><td>1.22%</td><td>11</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill active">Active</span></td>
+          </tr>
+          <tr>
+            <td>Supplement Brands – Subscription</td><td>718</td><td>1.53%</td><td>11</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill active">Active</span></td>
+          </tr>
+          <tr>
+            <td>All Tiers – Generic</td><td>627</td><td>1.44%</td><td>9</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>Running Intl Ads – Low Conv</td><td>421</td><td>1.43%</td><td>6</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill paused">Paused</span></td>
+          </tr>
+          <tr>
+            <td>ShipBob 3PL</td><td>272</td><td>1.18%</td><td>1</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>DHL 3PL</td><td>132</td><td style="color:var(--green)">2.63%</td><td>1</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>Stord Users</td><td>109</td><td>0.93%</td><td>1</td><td>0</td><td>—</td><td>—</td><td><span class="status-pill active">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- ═════════ PAID ADS ═════════ -->
+<section class="report-section container reveal" id="paid-ads">
+  <div class="section-header">
+    <div class="section-icon ads">📈</div>
+    <h2>Paid Ads</h2>
+    <span class="badge badge-blue">Meeting Engine</span>
+  </div>
+
+  <!-- Visual Funnel -->
+  <div class="funnel-visual">
+    <div class="funnel-stage">
+      <div class="funnel-bar" style="background:var(--gradient-brand);width:100%">45</div>
+      <div class="funnel-stage-label">Total Leads</div>
+    </div>
+    <div class="funnel-arrow">→</div>
+    <div class="funnel-stage">
+      <div class="funnel-bar" style="background:linear-gradient(135deg,#5b9aff,#8b6cff);width:85%">28</div>
+      <div class="funnel-stage-label">Valid Leads</div>
+      <div class="funnel-conv">62.2% valid</div>
+    </div>
+    <div class="funnel-arrow">→</div>
+    <div class="funnel-stage">
+      <div class="funnel-bar" style="background:var(--gradient-green);width:65%">16</div>
+      <div class="funnel-stage-label">Meetings</div>
+      <div class="funnel-conv">57.1% conversion</div>
+    </div>
+    <div class="funnel-arrow">→</div>
+    <div class="funnel-stage">
+      <div class="funnel-bar" style="background:linear-gradient(135deg,#8b6cff,#c56cff);width:40%">2</div>
+      <div class="funnel-stage-label">Opportunities</div>
+      <div class="funnel-conv">12.5% conversion</div>
+    </div>
+    <div class="funnel-arrow">→</div>
+    <div class="funnel-stage">
+      <div class="funnel-bar" style="background:var(--gradient-warm);width:35%">$40K</div>
+      <div class="funnel-stage-label">Pipeline</div>
+    </div>
+  </div>
+
+  <div class="channel-grid">
+    <div class="channel-card">
+      <h4><span class="dot-indicator" style="background:var(--green)"></span> Spend & Leads</h4>
+      <div class="stat-row"><span class="label">Total Spend</span><span class="val">$19,014.81</span></div>
+      <div class="stat-row"><span class="label">Meta Ads</span><span class="val">$15,067.81 <span style="font-size:10px;color:var(--text-muted);font-weight:400">(79.3%)</span></span></div>
+      <div class="stat-row"><span class="label">Google Ads</span><span class="val">$1,747.00 <span style="font-size:10px;color:var(--text-muted);font-weight:400">(9.2%)</span></span></div>
+      <div class="stat-row"><span class="label">6sense</span><span class="val">$2,200.00 <span style="font-size:10px;color:var(--text-muted);font-weight:400">(11.6%)</span></span></div>
+      <div class="stat-row"><span class="label">Total Leads</span><span class="val">45</span></div>
+      <div class="stat-row"><span class="label">Valid Leads</span><span class="val">28</span></div>
+    </div>
+    <div class="channel-card">
+      <h4><span class="dot-indicator" style="background:var(--accent)"></span> Conversion & ROI</h4>
+      <div class="stat-row"><span class="label">Meetings Booked</span><span class="val">16</span></div>
+      <div class="stat-row"><span class="label">Lead → Meeting</span><span class="val" style="color:var(--green)">57.1%</span></div>
+      <div class="stat-row"><span class="label">Opportunities</span><span class="val">2</span></div>
+      <div class="stat-row"><span class="label">Meeting → Opp</span><span class="val" style="color:var(--yellow)">12.5%</span></div>
+      <div class="stat-row"><span class="label">Pipeline Created</span><span class="val" style="color:var(--green)">$40,000</span></div>
+      <div class="stat-row"><span class="label">Cost / Valid Lead</span><span class="val">$559</span></div>
+      <div class="stat-row"><span class="label">Cost / Meeting</span><span class="val">$1,188</span></div>
+      <div class="stat-row"><span class="label">Cost / Opportunity</span><span class="val">$9,507</span></div>
+      <div class="callout-box yellow">
+        <strong>⚡ Key Lever:</strong> Meeting → Opp conversion (12.5%) is the clearest improvement opportunity without increasing spend. Better pre-qualification and booked-to-show enablement can move this needle.
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-row mt-24">
+    <div class="chart-container">
+      <h4>Spend Allocation</h4>
+      <canvas id="spendChart" height="260"></canvas>
+    </div>
+    <div class="chart-container">
+      <h4>Paid Ads Funnel</h4>
+      <canvas id="funnelChart" height="260"></canvas>
+    </div>
+  </div>
+
+  <!-- Meta ROI Breakdown -->
+  <div class="sub-heading">💰 Meta Ads — ROI Breakdown (Jan)</div>
+  <div class="channel-grid">
+    <div class="channel-card">
+      <h4>Meta Efficiency</h4>
+      <div class="stat-row"><span class="label">Meta Spend</span><span class="val">$15,067.81</span></div>
+      <div class="stat-row"><span class="label">Valid Leads (Meta)</span><span class="val">32</span></div>
+      <div class="stat-row"><span class="label">Cost per Valid Lead</span><span class="val">$471</span></div>
+      <div class="stat-row"><span class="label">Cost per Meeting</span><span class="val">$942</span></div>
+      <div class="stat-row"><span class="label">Cost per Opportunity</span><span class="val">$7,534</span></div>
+    </div>
+    <div class="channel-card">
+      <h4>Funnel Goals vs Actual</h4>
+      <div class="stat-row"><span class="label">Leads → Meetings (Goal: 50%)</span><span class="val" style="color:var(--green)">50.0% ✓</span></div>
+      <div class="stat-row"><span class="label">Meetings → Opp (Goal: 30%)</span><span class="val" style="color:var(--red)">12.5% ✗</span></div>
+      <div class="stat-row"><span class="label">Max CPL Goal</span><span class="val">$450</span></div>
+      <div class="stat-row"><span class="label">Actual CPL (Meta)</span><span class="val" style="color:var(--yellow)">$471</span></div>
+      <div class="callout-box green">
+        <strong>✅ On track:</strong> Lead generation efficiency is hitting goal. Focus shifts to down-funnel conversion quality.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- ═════════ ADS + LANDING PAGES ═════════ -->
+<section class="report-section container reveal" id="ads-lp">
+  <div class="section-header">
+    <div class="section-icon lp">🎯</div>
+    <h2>Ads + Landing Pages</h2>
+  </div>
+
+  <div class="channel-grid" style="margin-bottom:24px">
+    <div class="channel-card">
+      <h4>Meta Creative Execution</h4>
+      <div class="stat-row"><span class="label">Ad Sets Created/Ran</span><span class="val">39</span></div>
+      <div class="stat-row"><span class="label">Lead Gen Ad Sets</span><span class="val">33</span></div>
+      <div class="stat-row"><span class="label">Website Conversion Ad Sets</span><span class="val">6</span></div>
+      <div class="stat-row"><span class="label">Landing Page Views</span><span class="val" style="color:var(--green)">1,032</span></div>
+      <div class="stat-row"><span class="label">LPs Created in Jan</span><span class="val">6</span></div>
+    </div>
+    <div class="channel-card">
+      <h4>Best-Performing Ads</h4>
+      <div style="margin-bottom:14px">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:8px;font-weight:700">Lead Gen (by results)</div>
+        <div class="stat-row"><span class="label">Intl Returns Apparel – Generic</span><span class="val" style="color:var(--green)">5 results · $106 CPR</span></div>
+        <div class="stat-row"><span class="label">Global-E Lead Gen</span><span class="val" style="color:var(--green)">5 results · $133 CPR</span></div>
+      </div>
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:8px;font-weight:700">Landing Page Views (by volume)</div>
+        <div class="stat-row"><span class="label">Copy Paste US Ad – Reel</span><span class="val">420 LPVs · $1.13/LPV</span></div>
+        <div class="stat-row"><span class="label">Go Global in Hours</span><span class="val">130 LPVs · $2.53/LPV</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-heading">🏆 Top Landing Pages by Sessions</div>
+  <div class="lp-grid">
+    <div class="lp-card">
+      <h5>Run US Ads Globally</h5>
+      <div class="metric"><span class="label">Sessions</span><span class="val" style="color:var(--green)">473</span></div>
+      <div class="metric"><span class="label">Theme</span><span class="val">US Ad Expansion</span></div>
+      <a class="lp-link" href="https://www.openborder.com/landing-pages/run-us-ads-globally" target="_blank">View landing page →</a>
+    </div>
+    <div class="lp-card">
+      <h5>International Returns – Apparel</h5>
+      <div class="metric"><span class="label">Sessions</span><span class="val" style="color:var(--green)">243</span></div>
+      <div class="metric"><span class="label">Theme</span><span class="val">Returns Pain Point</span></div>
+      <a class="lp-link" href="https://www.openborder.com/landing-pages/international-returns-apparel" target="_blank">View landing page →</a>
+    </div>
+    <div class="lp-card">
+      <h5>OpenBorder vs Global-e</h5>
+      <div class="metric"><span class="label">Sessions</span><span class="val" style="color:var(--green)">236</span></div>
+      <div class="metric"><span class="label">Theme</span><span class="val">Competitor Displacement</span></div>
+      <a class="lp-link" href="https://www.openborder.com/landing-pages/openborder-vs-globale" target="_blank">View landing page →</a>
+    </div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:32px">🔗 Ad Creatives & Campaign Assets</div>
+  <div class="creative-links">
+    <a class="creative-link" href="https://www.openborder.com/landing-pages/openborder-vs-globale" target="_blank">Global-e Segment Ads <span class="arrow">↗</span></a>
+    <a class="creative-link" href="https://www.openborder.com/landing-pages/turn-high-canada-traffic-into-revenue" target="_blank">Canada Traffic Campaign <span class="arrow">↗</span></a>
+    <a class="creative-link" href="https://www.openborder.com/landing-pages/turn-high-europe-traffic-into-revenue" target="_blank">Europe Traffic Campaign <span class="arrow">↗</span></a>
+    <a class="creative-link" href="https://www.openborder.com/landing-pages/convert-uk-traffic-growth-into-revenue" target="_blank">UK Traffic Growth <span class="arrow">↗</span></a>
+    <a class="creative-link" href="https://www.openborder.com/landing-pages/run-us-ads-globally" target="_blank">Copy Paste US Ads <span class="arrow">↗</span></a>
+    <a class="creative-link" href="https://www.openborder.com/landing-pages/international-returns-apparel" target="_blank">Intl Returns Apparel <span class="arrow">↗</span></a>
+    <a class="creative-link" href="https://drive.google.com/drive/folders/1IIjmdudLLE4S9E3C8iIANPEvLHK5kjwB" target="_blank">📁 Intl Ads Creatives (Drive) <span class="arrow">↗</span></a>
+    <a class="creative-link" href="https://drive.google.com/drive/folders/1CN2Xoz-5pgsZWtvcarqr6xFdqYUuEF-q" target="_blank">📁 UK Traffic Creatives (Drive) <span class="arrow">↗</span></a>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- ═════════ DEALS PIPELINE ═════════ -->
+<section class="report-section container reveal" id="deals">
+  <div class="section-header">
+    <div class="section-icon deals">💼</div>
+    <h2>Q1 Deal Pipeline</h2>
+    <span class="badge badge-green">$415K Total</span>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th><th>Traffic</th><th>Deal Amount</th><th>Stage</th><th>Source</th><th>Channel</th><th>Outcome</th><th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Raycon Global</strong></td><td>1.3M</td><td style="color:var(--green);font-weight:700">$230,000</td><td><span class="deal-tag highly-engaged">Highly Engaged</span></td><td><span class="source-tag">Nurture Email</span></td><td>Email</td><td>Opportunity</td><td style="color:var(--text-dim);font-size:11px">Need updated PLD</td>
+          </tr>
+          <tr>
+            <td><strong>Saintjavelin</strong></td><td>109K</td><td style="color:var(--green);font-weight:700">$40,000</td><td><span class="deal-tag qualified">Qualified</span></td><td><span class="source-tag">Nurture Email</span></td><td>Email</td><td>Opportunity</td><td style="color:var(--text-dim);font-size:11px">Opportunity</td>
+          </tr>
+          <tr>
+            <td><strong>Revival Vintage</strong></td><td>74K</td><td style="color:var(--green);font-weight:700">$31,442</td><td><span class="deal-tag engaged">Engaged</span></td><td><span class="source-tag">UK LinkedIn</span></td><td>LinkedIn</td><td>Sales Qualified</td><td style="color:var(--text-dim);font-size:11px">PLD received</td>
+          </tr>
+          <tr>
+            <td><strong>Trukid</strong></td><td>4.6K</td><td style="color:var(--green);font-weight:700">$30,000</td><td><span class="deal-tag engaged">Engaged</span></td><td><span class="source-tag">Amazon Email</span></td><td>Email</td><td>Opportunity</td><td style="color:var(--text-dim);font-size:11px">$30K Deal</td>
+          </tr>
+          <tr>
+            <td><strong>Rowen & Wren</strong></td><td>151K</td><td style="color:var(--green);font-weight:700">$24,000</td><td><span class="deal-tag engaged">Engaged</span></td><td><span class="source-tag">Global-E Email</span></td><td>Email</td><td>Sales Qualified</td><td style="color:var(--text-dim);font-size:11px">PLD next week</td>
+          </tr>
+          <tr>
+            <td><strong>Kringle Candle</strong></td><td>103K</td><td style="color:var(--green);font-weight:700">$20,000</td><td><span class="deal-tag proposal">Proposal</span></td><td><span class="source-tag">Meta Ads</span></td><td>Meta</td><td>Opportunity</td><td style="color:var(--text-dim);font-size:11px">Opportunity</td>
+          </tr>
+          <tr>
+            <td><strong>Grayl</strong></td><td>92K</td><td style="color:var(--green);font-weight:700">$20,000</td><td><span class="deal-tag engaged">Engaged</span></td><td><span class="source-tag">High Intl Email</span></td><td>Email</td><td>Opportunity</td><td style="color:var(--text-dim);font-size:11px">$20K Deal</td>
+          </tr>
+          <tr>
+            <td><strong>Bern Helmets</strong></td><td>60K</td><td style="color:var(--green);font-weight:700">$20,000</td><td><span class="deal-tag engaged">Engaged</span></td><td><span class="source-tag">Meta Ads</span></td><td>Facebook</td><td>Opportunity</td><td style="color:var(--text-dim);font-size:11px">Rescheduling</td>
+          </tr>
+          <tr style="opacity:.6">
+            <td>Faherty Brand</td><td>1M</td><td>—</td><td><span class="deal-tag engaged">Completed</span></td><td><span class="source-tag">Meta Ads</span></td><td>Facebook</td><td>Sales Qualified</td><td style="color:var(--text-dim);font-size:11px">Meeting completed</td>
+          </tr>
+          <tr style="opacity:.6">
+            <td>Ripndip</td><td>289K</td><td>—</td><td><span class="deal-tag engaged">Completed</span></td><td><span class="source-tag">Meta Ads</span></td><td>Facebook</td><td>Sales Qualified</td><td style="color:var(--text-dim);font-size:11px">Signed NDA</td>
+          </tr>
+          <tr style="opacity:.6">
+            <td>Onesizebeauty</td><td>280K</td><td>—</td><td><span class="deal-tag engaged">Completed</span></td><td><span class="source-tag">Meta Ads</span></td><td>Facebook</td><td>Sales Qualified</td><td style="color:var(--text-dim);font-size:11px">Signed NDA</td>
+          </tr>
+          <tr style="opacity:.6">
+            <td>Conquering</td><td>82K</td><td>—</td><td><span class="deal-tag engaged">Completed</span></td><td><span class="source-tag">Meta Ads</span></td><td>Facebook</td><td>Sales Qualified</td><td style="color:var(--text-dim);font-size:11px">Meeting completed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- ═════════ QUARTER COMPARISON ═════════ -->
+<section class="report-section container reveal" id="funnel">
+  <div class="section-header">
+    <div class="section-icon funnel">📊</div>
+    <h2>Quarter-over-Quarter Funnel</h2>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-container">
+      <h4>Pipeline Generated by Quarter & Channel</h4>
+      <canvas id="quarterPipelineChart" height="280"></canvas>
+    </div>
+    <div class="chart-container">
+      <h4>Funnel Conversion Rates (QoQ)</h4>
+      <canvas id="quarterConversionChart" height="280"></canvas>
+    </div>
+  </div>
+
+  <div class="table-wrap mt-24">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Quarter</th><th>Channel</th><th>Leads</th><th>Meetings</th><th>Opps</th><th>Opp Value</th><th>Lead→Mtg</th><th>Mtg→Opp</th><th>Spend</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(91,154,255,.04)">
+            <td><strong>Q1 2026</strong></td><td>Email / LI</td><td>14</td><td>7</td><td>0*</td><td style="color:var(--green)">$375,442</td><td>50.0%</td><td>—</td><td>$1,536</td>
+          </tr>
+          <tr style="background:rgba(91,154,255,.04)">
+            <td><strong>Q1 2026</strong></td><td>Paid Ads</td><td>32</td><td>17</td><td>2</td><td>$40,000</td><td>53.1%</td><td>11.8%</td><td>$10,094</td>
+          </tr>
+          <tr style="background:rgba(91,154,255,.06)">
+            <td><strong>Q1 2026</strong></td><td><strong>TOTAL</strong></td><td><strong>46</strong></td><td><strong>24</strong></td><td><strong>2</strong></td><td style="color:var(--green)"><strong>$415,442</strong></td><td><strong>52.2%</strong></td><td><strong>8.3%</strong></td><td><strong>$11,630</strong></td>
+          </tr>
+          <tr><td colspan="9" style="height:3px;padding:0;background:var(--border)"></td></tr>
+          <tr>
+            <td>Q4 2025</td><td>Email / LI</td><td>56</td><td>29</td><td>7</td><td>$231,200</td><td>51.8%</td><td>24.1%</td><td>$3,139</td>
+          </tr>
+          <tr>
+            <td>Q4 2025</td><td>Paid Ads</td><td>21</td><td>7</td><td>3</td><td>$76,000</td><td>33.3%</td><td>42.9%</td><td>$39,015</td>
+          </tr>
+          <tr>
+            <td>Q4 2025</td><td><strong>TOTAL</strong></td><td><strong>77</strong></td><td><strong>36</strong></td><td><strong>10</strong></td><td><strong>$487,200</strong></td><td><strong>46.8%</strong></td><td><strong>27.8%</strong></td><td>—</td>
+          </tr>
+          <tr><td colspan="9" style="height:3px;padding:0;background:var(--border)"></td></tr>
+          <tr>
+            <td>Q3 2025</td><td>Email / LI</td><td>68</td><td>44</td><td>23</td><td>$1,830,000</td><td>64.7%</td><td>52.3%</td><td>$2,218</td>
+          </tr>
+          <tr>
+            <td>Q3 2025</td><td><strong>TOTAL</strong></td><td><strong>71</strong></td><td><strong>47</strong></td><td><strong>35</strong></td><td><strong>$2,113,000</strong></td><td><strong>66.2%</strong></td><td><strong>74.5%</strong></td><td>—</td>
+          </tr>
+          <tr><td colspan="9" style="height:3px;padding:0;background:var(--border)"></td></tr>
+          <tr>
+            <td>Q2 2025</td><td><strong>TOTAL</strong></td><td><strong>32</strong></td><td><strong>18</strong></td><td><strong>9</strong></td><td><strong>$350,000</strong></td><td><strong>56.3%</strong></td><td><strong>50.0%</strong></td><td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p style="margin-top:12px;font-size:11px;color:var(--text-muted)">*Q1 2026 email opps attributed to prior-quarter leads maturing in January (6 opps / $375K pipeline)</p>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- ═════════ CROSS-CHANNEL INSIGHTS ═════════ -->
+<section class="report-section container reveal" id="insights">
+  <div class="section-header">
+    <div class="section-icon insight">💡</div>
+    <h2>Cross-Channel Insights</h2>
+  </div>
+
+  <div class="insight-banner">
+    <h4>What January Revealed</h4>
+    <ul>
+      <li><strong>Email is the pipeline multiplier</strong> — prior-quarter leads materially contributed $375K in January pipeline. The channel creates durable, compounding value even when immediate reply rates appear low.</li>
+      <li><strong>Paid Ads is the predictable meeting engine</strong> — efficient, measurable meeting generation with 57% lead-to-meeting conversion. The bottleneck is down-funnel: Meeting → Opp at 12.5% is the lever to pull.</li>
+      <li><strong>LP + creative system supports both channels</strong> — top landing pages (US Ads Globally, Returns Apparel, Global-e comparison) align perfectly with the strongest email and paid themes.</li>
+      <li><strong>Three narratives dominate across all channels</strong> — High International Traffic, Returns/Apparel friction, and Global-e displacement are the winning themes in email, ads, and landing pages simultaneously.</li>
+    </ul>
+  </div>
+
+  <!-- Channel contribution chart -->
+  <div class="chart-row mt-24">
+    <div class="chart-container">
+      <h4>Pipeline Source — January 2026</h4>
+      <canvas id="pipelineSourceChart" height="260"></canvas>
+    </div>
+    <div class="chart-container">
+      <h4>Meeting Source — January 2026</h4>
+      <canvas id="meetingSourceChart" height="260"></canvas>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- ═════════ NEXT STEPS ═════════ -->
+<section class="report-section container reveal" id="next-steps">
+  <div class="section-header">
+    <div class="section-icon next">🚀</div>
+    <h2>February Focus & Next Steps</h2>
+  </div>
+
+  <div class="next-grid">
+    <div class="next-card">
+      <div class="num">1</div>
+      <h5>Protect & Grow Pipeline</h5>
+      <p>Expand the winning narratives across channels — High Intl Traffic, Returns/Apparel, and Global-e comparison. Double down on the 3 best email themes that drove positive replies.</p>
+    </div>
+    <div class="next-card">
+      <div class="num">2</div>
+      <h5>Increase Opportunity Conversion</h5>
+      <p>Target Meeting → Opp improvements (currently 12.5% for Paid Ads). Better pre-qualification, stronger booked-to-show enablement, and tighter intent-based targeting.</p>
+    </div>
+    <div class="next-card">
+      <div class="num">3</div>
+      <h5>Improve Reporting Clarity</h5>
+      <p>Maintain clean separation between new-month outcomes and prior-quarter lead conversions. Operationalize attribution with campaign + cohort tagging.</p>
+    </div>
+    <div class="next-card">
+      <div class="num">4</div>
+      <h5>Scale Top LP + Ad Combos</h5>
+      <p>Continue scaling Returns Apparel and Global-e Lead Gen ad sets. Improve on-page conversion with CTA clarity, social proof, and ad-to-LP message consistency.</p>
+    </div>
+    <div class="next-card">
+      <div class="num">5</div>
+      <h5>Launch Queued Campaigns</h5>
+      <p>Activate drafted Q1 campaigns: Contract Renewal Global-e, Amazon US expansion, Passport displacement, UK expansion, and Shipping Intent campaigns.</p>
+    </div>
+    <div class="next-card">
+      <div class="num">6</div>
+      <h5>Reply Taxonomy & Targeting</h5>
+      <p>Add lightweight reason taxonomy for replies (Interested / Wrong person / Not now / Not relevant) to continuously improve targeting and messaging quality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FOOTER ═════════ -->
+<footer>
+  <div class="container">
+    <div class="logo">OpenBorder</div>
+    <p>January 2026 Marketing Monthly Report · Generated Feb 6, 2026</p>
+    <p style="margin-top:8px"><a href="https://www.openborder.com" target="_blank">openborder.com</a></p>
+  </div>
+</footer>
+
+<script>
+// ─── Pipeline Animation ───
+setTimeout(() => {
+  const fill = document.getElementById('pipelineFill');
+  fill.style.width = '20.77%';
+  setTimeout(() => fill.classList.add('animated'), 1200);
+}, 500);
+
+// ─── Sticky Nav ───
+const nav = document.getElementById('stickyNav');
+let lastY = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > 300) nav.classList.add('visible');
+  else nav.classList.remove('visible');
+  lastY = y;
+});
+
+// Active nav link
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const observerNav = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-link[data-section="${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observerNav.observe(s));
+
+// ─── Scroll Reveal ───
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ─── Chart.js Defaults ───
+Chart.defaults.color = '#8a94ae';
+Chart.defaults.borderColor = 'rgba(255,255,255,.04)';
+Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.font.weight = 500;
+
+const chartTooltipStyle = {
+  backgroundColor: 'rgba(16,19,28,.92)',
+  borderColor: 'rgba(255,255,255,.08)',
+  borderWidth: 1,
+  titleFont: { weight: 700, size: 12 },
+  bodyFont: { size: 11 },
+  padding: 12,
+  cornerRadius: 8,
+  displayColors: true,
+  boxPadding: 4,
+};
+
+// ─── Campaign Positive Replies ───
+new Chart(document.getElementById('campaignRepliesChart'), {
+  type: 'bar',
+  data: {
+    labels: ['High Intl 40%+', 'Using Global-e', 'Intl Returns Apparel', 'UK Traffic Growth', 'DDU→DDP', 'Canada Traffic'],
+    datasets: [{
+      data: [5, 4, 2, 1, 1, 1],
+      backgroundColor: ['#5b9aff', '#8b6cff', '#3ee8a5', '#ffc245', '#ff6b6b', '#c56cff'],
+      borderRadius: 8,
+      barThickness: 28,
+    }]
+  },
+  options: {
+    responsive: true, indexAxis: 'y',
+    plugins: { legend: { display: false }, tooltip: chartTooltipStyle },
+    scales: {
+      x: { grid: { display: false }, ticks: { stepSize: 1 } },
+      y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+    }
+  }
+});
+
+// ─── Email Volume ───
+new Chart(document.getElementById('emailVolumeChart'), {
+  type: 'bar',
+  data: {
+    labels: ['High Intl 40%+', 'UK Traffic', 'Global-e', 'Returns Apparel', 'US Ads T3', 'Supplements', 'Intl 25%+', 'Generic', 'DDU→DDP', 'Intl Ads Low Conv'],
+    datasets: [{
+      data: [2639, 1534, 1527, 1139, 937, 718, 722, 627, 502, 421],
+      backgroundColor: 'rgba(91,154,255,.35)',
+      borderColor: '#5b9aff',
+      borderWidth: 1,
+      borderRadius: 4,
+      barThickness: 16,
+    }]
+  },
+  options: {
+    responsive: true, indexAxis: 'y',
+    plugins: { legend: { display: false }, tooltip: chartTooltipStyle },
+    scales: {
+      x: { grid: { color: 'rgba(255,255,255,.03)' } },
+      y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// ─── Spend Allocation ───
+new Chart(document.getElementById('spendChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Meta Ads — $15,068', 'Google Ads — $1,747', '6sense — $2,200'],
+    datasets: [{
+      data: [15067.81, 1747, 2200],
+      backgroundColor: ['#5b9aff', '#3ee8a5', '#ffc245'],
+      borderWidth: 0, spacing: 4,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    responsive: true, cutout: '70%',
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 11 } } },
+      tooltip: chartTooltipStyle,
+    }
+  }
+});
+
+// ─── Paid Ads Funnel ───
+new Chart(document.getElementById('funnelChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Total Leads', 'Valid Leads', 'Meetings', 'Opportunities'],
+    datasets: [{
+      data: [45, 28, 16, 2],
+      backgroundColor: [
+        'rgba(91,154,255,.5)', 'rgba(91,154,255,.65)',
+        'rgba(62,232,165,.6)', 'rgba(139,108,255,.6)'
+      ],
+      borderRadius: 8, barThickness: 44,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false }, tooltip: chartTooltipStyle },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: 'rgba(255,255,255,.03)' } }
+    }
+  }
+});
+
+// ─── Quarter Pipeline ───
+new Chart(document.getElementById('quarterPipelineChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Q2 2025', 'Q3 2025', 'Q4 2025', 'Q1 2026 (Jan)'],
+    datasets: [
+      {
+        label: 'Email / LI',
+        data: [225000, 1830000, 231200, 375442],
+        backgroundColor: '#5b9aff',
+        borderRadius: 4,
+      },
+      {
+        label: 'Paid Ads',
+        data: [0, 0, 76000, 40000],
+        backgroundColor: '#3ee8a5',
+        borderRadius: 4,
+      },
+      {
+        label: 'Agency',
+        data: [125000, 283000, 180000, 0],
+        backgroundColor: '#ffc245',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } },
+      tooltip: chartTooltipStyle,
+    },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, grid: { color: 'rgba(255,255,255,.03)' }, ticks: { callback: v => '$' + (v/1000) + 'K' } }
+    }
+  }
+});
+
+// ─── Quarter Conversion ───
+new Chart(document.getElementById('quarterConversionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Q2 2025', 'Q3 2025', 'Q4 2025', 'Q1 2026'],
+    datasets: [
+      {
+        label: 'Lead → Meeting %',
+        data: [56.3, 66.2, 46.8, 52.2],
+        borderColor: '#5b9aff',
+        backgroundColor: 'rgba(91,154,255,.08)',
+        fill: true, tension: .4,
+        pointRadius: 6, pointBackgroundColor: '#5b9aff',
+        pointBorderColor: '#07090d', pointBorderWidth: 2,
+      },
+      {
+        label: 'Meeting → Opp %',
+        data: [50.0, 74.5, 27.8, 8.3],
+        borderColor: '#8b6cff',
+        backgroundColor: 'rgba(139,108,255,.06)',
+        fill: true, tension: .4,
+        pointRadius: 6, pointBackgroundColor: '#8b6cff',
+        pointBorderColor: '#07090d', pointBorderWidth: 2,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } },
+      tooltip: chartTooltipStyle,
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: 'rgba(255,255,255,.03)' }, ticks: { callback: v => v + '%' }, min: 0, max: 100 }
+    }
+  }
+});
+
+// ─── Pipeline Source (new) ───
+new Chart(document.getElementById('pipelineSourceChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Email / LinkedIn — $375,442', 'Paid Ads — $40,000'],
+    datasets: [{
+      data: [375442, 40000],
+      backgroundColor: ['#5b9aff', '#3ee8a5'],
+      borderWidth: 0, spacing: 4, hoverOffset: 8,
+    }]
+  },
+  options: {
+    responsive: true, cutout: '70%',
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } },
+      tooltip: {
+        ...chartTooltipStyle,
+        callbacks: { label: ctx => ' $' + ctx.parsed.toLocaleString() + ' (' + (ctx.parsed / 415442 * 100).toFixed(1) + '%)' }
+      }
+    }
+  }
+});
+
+// ─── Meeting Source (new) ───
+new Chart(document.getElementById('meetingSourceChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Email — 6 meetings', 'Paid Ads — 16 meetings', 'Prior-Q Leads — 15 meetings'],
+    datasets: [{
+      data: [6, 16, 15],
+      backgroundColor: ['#5b9aff', '#3ee8a5', '#ffc245'],
+      borderWidth: 0, spacing: 4, hoverOffset: 8,
+    }]
+  },
+  options: {
+    responsive: true, cutout: '70%',
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } },
+      tooltip: chartTooltipStyle,
+    }
+  }
+});
+</script>
+</body>
+</html>
